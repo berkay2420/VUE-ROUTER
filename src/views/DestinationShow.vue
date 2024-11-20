@@ -6,21 +6,46 @@
       <p>{{destination.description}}</p>
     </div>
   </section>
+  <section class="experiences">
+    <h2>Top experiences in {{destination.name }}</h2>
+    <div class="cards">
+        <router-link 
+          v-for="experience in destination.experiences"
+          :key="experience.slug"
+          :to="{name:'experience.show', params:{experience:experience.slug}}"
+        >
+          <ExperienceCard
+            :experience="experience"
+          />
+        </router-link>
+
+        <!-- <ExperienceCard
+          v-for="experience in destination.experiences"
+          :key="experience.slug"
+          :to="{name:'experience.show', params:{experience:experience.name}}"
+          :experience="experience"
+        /> -->
+    </div>
+    
+  </section>
 </template>
 
 <script>
 import sourceData from '@/data.json'
+import ExperienceCard from '@/components/ExperienceCard.vue';
 
 export default {
+  components:{ExperienceCard},
+  props:{
+    id: {type: Number, required:true}
+  },
   computed:{
-    destinationId(){
-      return parseInt(this.$route.params.id)
-    },
     destination(){
       return sourceData.destinations.find(
-        (destination) => destination.id === this.destinationId
+        (destination) => destination.id === this.id
       );
     }
+    
   }
   // FETHING DATA FROM https://travel-dummy-api.netlify.app/
   // data(){

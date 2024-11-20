@@ -8,7 +8,25 @@ const routes = [
   // {path: '/hawaii', name:'Hawaii', component:()=>import('@/views/Hawaii.vue')},
   // {path: '/jamaica', name:"Jamaica", component: ()=> import('@/views/Jamaica.vue')},
   // {path: '/panama', name:"Panama", component: ()=> import('@/views/Panama.vue')},
-  {path: '/destination/:id/:slug',name:"destination.show" ,component: ()=>import('@/views/DestinationShow.vue')}
+  {
+    path: '/destination/:id/:slug',
+    name:"destination.show",
+    component: ()=>import('@/views/DestinationShow.vue'),
+    props: route => ({id: parseInt(route.params.id)}),
+    // children: [
+    //   {
+    //     name:"experience.show",
+    //     path: '/destination/:id/:slug/:experience',
+    //     component: ()=>import('@/views/ExperienceShow.vue')
+    //   }
+    // ]
+  },
+  {
+    path: '/destination/:id/:slug/:experience',
+    name:"experince.show",
+    component: ()=>import('@/views/ExperienceShow.vue'),
+    props: route => ({id: parseInt(route.params.id)})
+  }
 ]
 
 const router = createRouter({

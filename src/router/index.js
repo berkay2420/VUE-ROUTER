@@ -12,20 +12,22 @@ const routes = [
     path: '/destination/:id/:slug',
     name:"destination.show",
     component: ()=>import('@/views/DestinationShow.vue'),
-    props: route => ({id: parseInt(route.params.id)}),
+    props: route => ({...route.params, id: parseInt(route.params.id)}),
     // children: [
     //   {
+    //     path: ':experienceSlug',
     //     name:"experience.show",
-    //     path: '/destination/:id/:slug/:experience',
-    //     component: ()=>import('@/views/ExperienceShow.vue')
+    //     component: ()=>import('@/views/ExperienceShow.vue'),
+    //     props: route => ({...route.params, id: parseInt(route.params.id)})
     //   }
+
     // ]
   },
   {
-    path: '/destination/:id/:slug/:experience',
-    name:"experince.show",
+    path: '/destination/:id/:slug/:experienceSlug',
+    name:"experience.show",
     component: ()=>import('@/views/ExperienceShow.vue'),
-    props: route => ({id: parseInt(route.params.id)})
+    props: route => ({...route.params, id: parseInt(route.params.id)})
   }
 ]
 
